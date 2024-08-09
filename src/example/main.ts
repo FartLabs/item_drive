@@ -1,16 +1,19 @@
+import { default as jsonld } from "jsonld";
 import { createRouter } from "@fartlabs/rt";
-import type { FactQuery, Item } from "#/mod.ts";
-import {
-  convertJSONLdDocumentToItems,
-  InMemoryDataSource,
-  ItemDrive,
-} from "#/mod.ts";
+import { fromJSONLd } from "#/from_jsonld.ts";
+import type { FactQuery } from "#/facts/fact_query.ts";
+import type { Item } from "#/items/item.ts";
+import { ItemDrive } from "#/item_drive.ts";
+import { InMemoryDataSource } from "#/data_sources/in_memory_data_source/mod.ts";
 
 if (import.meta.main) {
-  const schemaOrgItems = await convertJSONLdDocumentToItems(
-    JSON.parse(
-      await Deno.readTextFile(
-        new URL(import.meta.resolve("./schemaorg-current-https.jsonld")),
+  // TODO: Abstract schema.org ingestion into a separate function.
+  const schemaOrgItems = fromJSONLd(
+    await jsonld.flatten(
+      JSON.parse(
+        await Deno.readTextFile(
+          new URL(import.meta.resolve("./schemaorg-current-https.jsonld")),
+        ),
       ),
     ),
   );
@@ -44,7 +47,7 @@ if (import.meta.main) {
   Deno.serve((request) => router.fetch(request));
 }
 
-function parseQuery(url: URL): FactQuery | undefined {
+function parseQuery(url: URL): FactQuery[] | undefined {
   const query = url.searchParams.get("query");
   return query ? JSON.parse(query) : undefined;
 }

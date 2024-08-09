@@ -6,7 +6,7 @@ import type { FactValue } from "./fact_value.ts";
 export interface Fact {
   factID: string;
   itemID: string;
-  label: string;
+  label: string; // TODO: Rename to property.
   timestamp: number;
   value: FactValue;
 
