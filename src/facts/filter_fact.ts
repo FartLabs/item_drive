@@ -7,7 +7,7 @@ import type { FactValue } from "./fact_value.ts";
  */
 export function filterFact(fact: Fact, query: FactQuery): boolean {
   return (
-    filterFactLabel(fact, query.label) &&
+    filterFactProperty(fact, query.property) &&
     filterFactID(fact, query) &&
     filterFactTimestamp(fact.timestamp, query) &&
     filterFactValue(fact.value, query)
@@ -15,10 +15,10 @@ export function filterFact(fact: Fact, query: FactQuery): boolean {
 }
 
 /**
- * filterFactLabel filters a fact based on the label.
+ * filterFactProperty filters a fact based on the property.
  */
-export function filterFactLabel(fact: Fact, label?: string): boolean {
-  return label === undefined || fact.label === label;
+export function filterFactProperty(fact: Fact, property?: string): boolean {
+  return property === undefined || fact.property === property;
 }
 
 /**

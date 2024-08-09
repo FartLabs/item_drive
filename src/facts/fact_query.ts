@@ -2,7 +2,7 @@
  * FactQuery is a query object that can be used to filter a fact.
  */
 export interface FactQuery {
-  label?: string;
+  property?: string;
   factID?: string[];
   itemID?: string[];
   value?: unknown;

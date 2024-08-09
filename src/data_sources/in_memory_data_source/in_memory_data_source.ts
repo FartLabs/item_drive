@@ -55,7 +55,7 @@ export class InMemoryDataSource implements DataSourceInterface {
     );
 
     if (factID.length === 0 && itemID.length === 0) {
-      // Add all facts that match the query by labels if no itemID or factID is specified.
+      // Add all facts that match the query by properties if no itemID or factID is specified.
       for (const facts of this.factsByItemID.values()) {
         result.push(
           ...Array.from(facts.values())

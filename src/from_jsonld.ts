@@ -17,11 +17,11 @@ export const PROPERTY_TYPE = "@type";
  */
 // deno-lint-ignore no-explicit-any
 export function fromJSONLd(nodeOrNodes: any) {
-    if (Array.isArray(nodeOrNodes)) {
-        return nodeOrNodes.map((node) => fromJSONLdNode(node));
-    }
+  if (Array.isArray(nodeOrNodes)) {
+    return nodeOrNodes.map((node) => fromJSONLdNode(node));
+  }
 
-    return [fromJSONLdNode(nodeOrNodes)];
+  return [fromJSONLdNode(nodeOrNodes)];
 }
 
 /**
@@ -29,47 +29,47 @@ export function fromJSONLd(nodeOrNodes: any) {
  */
 // deno-lint-ignore no-explicit-any
 export function fromJSONLdNode(node: any): PartialItem {
-    const itemID = node[PROPERTY_ID];
-    if (typeof itemID !== "string") {
-        throw new Error("Unexpected node");
-    }
+  const itemID = node[PROPERTY_ID];
+  if (typeof itemID !== "string") {
+    throw new Error("Unexpected node");
+  }
 
-    return {
-        itemID,
-        facts: Object.entries(node)
-            .filter(([property]) => property !== PROPERTY_ID)
-            .flatMap(
-                ([property, value]) => fromJSONLdProperty(property, value),
-            ),
-    };
+  return {
+    itemID,
+    facts: Object.entries(node)
+      .filter(([property]) => property !== PROPERTY_ID)
+      .flatMap(
+        ([property, value]) => fromJSONLdProperty(property, value),
+      ),
+  };
 }
 
 /**
  * fromJSONLdProperty converts a JSON-LD property to a fact.
  */
 export function fromJSONLdProperty(
-    property: string,
-    // deno-lint-ignore no-explicit-any
-    value: any,
+  property: string,
+  // deno-lint-ignore no-explicit-any
+  value: any,
 ): PartialFact[] {
-    if (Array.isArray(value)) {
-        return value.flatMap((item) => fromJSONLdProperty(property, item));
-    }
+  if (Array.isArray(value)) {
+    return value.flatMap((item) => fromJSONLdProperty(property, item));
+  }
 
-    if (value === undefined || value === null) {
-        throw new Error(`Unexpected value for property ${property}`);
-    }
+  if (value === undefined || value === null) {
+    throw new Error(`Unexpected value for property ${property}`);
+  }
 
-    // @type is a special case where the value is not an object,
-    // but a string.
-    if (property === PROPERTY_TYPE && typeof value === "string") {
-        return [{ label: property, value: { "@id": value } }];
-    }
+  // @type is a special case where the value is not an object,
+  // but a string.
+  if (property === PROPERTY_TYPE && typeof value === "string") {
+    return [{ property: property, value: { "@id": value } }];
+  }
 
-    return [{
-        label: property,
-        value: fromJSONLdPropertyValue(value),
-    }];
+  return [{
+    property: property,
+    value: fromJSONLdPropertyValue(value),
+  }];
 }
 
 /**
@@ -77,30 +77,30 @@ export function fromJSONLdProperty(
  */
 // deno-lint-ignore no-explicit-any
 export function fromJSONLdPropertyValue(value: any): FactValue {
-    if (value === undefined || value === null) {
-        throw new Error("Unexpected value");
+  if (value === undefined || value === null) {
+    throw new Error("Unexpected value");
+  }
+
+  if (typeof value === "object") {
+    if ("@id" in value && typeof value["@id"] === "string") {
+      return { "@id": value["@id"] };
     }
 
-    if (typeof value === "object") {
-        if ("@id" in value && typeof value["@id"] === "string") {
-            return { "@id": value["@id"] };
-        }
-
-        if ("@value" in value) {
-            return { "@value": value["@value"] };
-        }
-
-        // if ("@list" in value && Array.isArray(value["@list"])) {
-        //   return { "@list": value["@list"] as FactValue[] };
-        // }
-
-        // if ("@set" in value && Array.isArray(value["@set"])) {
-        //   return { "@set": value["@set"] as FactValue[] };
-        // }
-
-        throw new Error("Unexpected object value");
+    if ("@value" in value) {
+      return { "@value": value["@value"] };
     }
 
-    // Wrap the value in an @value envelope.
-    return { "@value": value };
+    // if ("@list" in value && Array.isArray(value["@list"])) {
+    //   return { "@list": value["@list"] as FactValue[] };
+    // }
+
+    // if ("@set" in value && Array.isArray(value["@set"])) {
+    //   return { "@set": value["@set"] as FactValue[] };
+    // }
+
+    throw new Error("Unexpected object value");
+  }
+
+  // Wrap the value in an @value envelope.
+  return { "@value": value };
 }

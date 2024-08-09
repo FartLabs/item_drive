@@ -3,7 +3,7 @@ import type { DataSourceInterface } from "./data_sources/data_source_interface.t
 import type { FactQuery } from "./facts/fact_query.ts";
 import type { Item, PartialItem } from "./items/mod.ts";
 import { makeItem } from "./items/mod.ts";
-import { groupByOptionalLabel } from "#/facts/group_by_label.ts";
+import { groupByOptionalProperty } from "./facts/group_by_property.ts";
 
 /**
  * ItemDrive manages the items in the drive.
@@ -60,11 +60,11 @@ export class ItemDrive implements ItemDriveInterface {
     }
 
     const itemIDs = await Promise.all(
-      Object.values(groupByOptionalLabel(query))
+      Object.values(groupByOptionalProperty(query))
         .map(
-          async (queryByLabel) =>
+          async (propertyQuery) =>
             new Set(
-              (await this.dataSource.fetchFacts(queryByLabel))
+              (await this.dataSource.fetchFacts(propertyQuery))
                 .map((fact) => fact.itemID),
             ),
         ),
