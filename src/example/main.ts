@@ -1,26 +1,14 @@
-import { default as jsonld } from "jsonld";
 import { createRouter } from "@fartlabs/rt";
-import { fromJSONLd } from "#/from_jsonld.ts";
 import type { FactQuery } from "#/facts/fact_query.ts";
 import type { Item } from "#/items/item.ts";
 import { ItemDrive } from "#/item_drive.ts";
 import { InMemoryDataSource } from "#/data_sources/in_memory_data_source/mod.ts";
+import { ingestSchema } from "./ingest_schema.ts";
 
 if (import.meta.main) {
-  // TODO: Abstract schema.org ingestion into a separate function.
-  const schemaOrgItems = fromJSONLd(
-    await jsonld.flatten(
-      JSON.parse(
-        await Deno.readTextFile(
-          new URL(import.meta.resolve("./schemaorg-current-https.jsonld")),
-        ),
-      ),
-    ),
-  );
-
   const dataSource = new InMemoryDataSource(); // TODO: Replace with DenoKvDataSource.
   const itemDrive = new ItemDrive(dataSource);
-  await itemDrive.insertItems(schemaOrgItems);
+  await ingestSchema(itemDrive);
 
   const router = createRouter()
     .get("/items", async (ctx) => {
