@@ -1,5 +1,5 @@
-import type { DataSourceInterface } from "./data_source_interface.ts";
 import type { ItemDriveInterface } from "./item_drive_interface.ts";
+import type { DataSourceInterface } from "./data_sources/data_source_interface.ts";
 import type { FactQuery } from "./facts/fact_query.ts";
 import type { Item, PartialItem } from "./items/mod.ts";
 import { makeItem } from "./items/mod.ts";

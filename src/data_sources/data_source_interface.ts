@@ -1,6 +1,6 @@
-import type { Fact } from "./facts/fact.ts";
-import type { FactQuery } from "./facts/fact_query.ts";
-import type { PartialFact } from "./facts/partial_fact.ts";
+import type { Fact } from "#/facts/fact.ts";
+import type { FactQuery } from "#/facts/fact_query.ts";
+import type { PartialFact } from "#/facts/partial_fact.ts";
 
 /**
  * DataSourceInterface describes the read/write operations that are supported
