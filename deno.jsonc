@@ -2,7 +2,7 @@
   "imports": {
     "#/": "./src/",
     "@fartlabs/rt": "jsr:@fartlabs/rt@^0.0.3",
-    "@std/assert": "jsr:@std/assert@^1.0.0",
+    "@std/assert": "jsr:@std/assert@^1.0.2",
     "@std/ulid": "jsr:@std/ulid@^1.0.0",
     "jsonld": "npm:jsonld@^8.3.2"
   },
