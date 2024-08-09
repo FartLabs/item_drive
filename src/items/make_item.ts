@@ -8,7 +8,7 @@ import type { PartialItem } from "./partial_item.ts";
  */
 export function makeItem(
   partialItem: PartialItem,
-  date = new Date(),
+  date: Date = new Date(),
 ): Item {
   const itemID = partialItem.itemID ?? ulid(date.getTime());
   return {

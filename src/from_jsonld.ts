@@ -16,7 +16,7 @@ export const PROPERTY_TYPE = "@type";
  * fromJSONLd converts JSON-LD nodes to items.
  */
 // deno-lint-ignore no-explicit-any
-export function fromJSONLd(nodeOrNodes: any) {
+export function fromJSONLd(nodeOrNodes: any): PartialItem[] {
   if (Array.isArray(nodeOrNodes)) {
     return nodeOrNodes.map((node) => fromJSONLdNode(node));
   }

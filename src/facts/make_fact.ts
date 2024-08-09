@@ -5,7 +5,7 @@ import type { PartialFact } from "./partial_fact.ts";
 /**
  * makeFact makes a fully-qualified fact from a partial fact.
  */
-export function makeFact(fact: PartialFact, date = new Date()): Fact {
+export function makeFact(fact: PartialFact, date: Date = new Date()): Fact {
   if (fact.property === undefined) {
     throw new Error("Property is required");
   }
