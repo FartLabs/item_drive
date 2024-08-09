@@ -62,23 +62,31 @@ export function filterFactValue(
   factValue: FactValue,
   query: FactQuery,
 ): boolean {
-  if (query.value === undefined) {
-    return true;
+  if (query.value !== undefined && "@value" in factValue) {
+    if (!filterFactValueIncludes(factValue, query.value)) {
+      return false;
+    }
   }
 
   if (query.valueIncludes !== undefined) {
-    return filterFactValueIncludes(factValue, query.valueIncludes);
+    if (!filterFactValueIncludes(factValue, query.valueIncludes)) {
+      return false;
+    }
   }
 
   if (query.valueAtOrAbove !== undefined) {
-    return filterFactValueAtOrAbove(factValue, query.valueAtOrAbove);
+    if (!filterFactValueAtOrAbove(factValue, query.valueAtOrAbove)) {
+      return false;
+    }
   }
 
   if (query.valueAtOrBelow !== undefined) {
-    return filterFactValueAtOrBelow(factValue, query.valueAtOrBelow);
+    if (!filterFactValueAtOrBelow(factValue, query.valueAtOrBelow)) {
+      return false;
+    }
   }
 
-  return false;
+  return true;
 }
 
 /**
