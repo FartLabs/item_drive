@@ -1,13 +1,41 @@
 {
+  "name": "@fartlabs/item-drive",
+  "version": "0.0.1",
   "imports": {
     "#/": "./src/",
     "@fartlabs/rt": "jsr:@fartlabs/rt@^0.0.3",
     "@std/assert": "jsr:@std/assert@^1.0.2",
+    "@std/fs": "jsr:@std/fs@^1.0.1",
+    "@std/jsonc": "jsr:@std/jsonc@^1.0.0",
+    "@std/path": "jsr:@std/path@^1.0.2",
     "@std/ulid": "jsr:@std/ulid@^1.0.0",
     "@types/jsonld": "npm:@types/jsonld@^1.5.15",
     "jsonld": "npm:jsonld@^8.3.2"
   },
   "tasks": {
-    "dev": "deno run -A --env --watch src/example/main.ts"
+    "dev": "deno run -A --env --watch src/example/main.ts",
+    "generate": "deno run --allow-read --allow-write generate_exports.ts"
+  },
+  "exports": {
+    "./data_sources/data_source_interface": "./src/data_sources/data_source_interface.ts",
+    "./data_sources/in_memory_data_source/in_memory_data_source": "./src/data_sources/in_memory_data_source/in_memory_data_source.ts",
+    "./data_sources/in_memory_data_source": "./src/data_sources/in_memory_data_source/mod.ts",
+    "./data_sources": "./src/data_sources/mod.ts",
+    "./facts/fact": "./src/facts/fact.ts",
+    "./facts/fact_query": "./src/facts/fact_query.ts",
+    "./facts/fact_value": "./src/facts/fact_value.ts",
+    "./facts/filter_fact": "./src/facts/filter_fact.ts",
+    "./facts/group_by_property": "./src/facts/group_by_property.ts",
+    "./facts/make_fact": "./src/facts/make_fact.ts",
+    "./facts": "./src/facts/mod.ts",
+    "./facts/partial_fact": "./src/facts/partial_fact.ts",
+    "./from_jsonld": "./src/from_jsonld.ts",
+    "./item_drive": "./src/item_drive.ts",
+    "./item_drive_interface": "./src/item_drive_interface.ts",
+    "./items/item": "./src/items/item.ts",
+    "./items/make_item": "./src/items/make_item.ts",
+    "./items": "./src/items/mod.ts",
+    "./items/partial_item": "./src/items/partial_item.ts",
+    ".": "./src/mod.ts"
   }
 }

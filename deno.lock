@@ -4,7 +4,11 @@
     "specifiers": {
       "jsr:@fartlabs/rt@^0.0.3": "jsr:@fartlabs/rt@0.0.3",
       "jsr:@std/assert@^1.0.2": "jsr:@std/assert@1.0.2",
+      "jsr:@std/fs@^1.0.1": "jsr:@std/fs@1.0.1",
       "jsr:@std/internal@^1.0.1": "jsr:@std/internal@1.0.1",
+      "jsr:@std/json@^1.0.0": "jsr:@std/json@1.0.0",
+      "jsr:@std/jsonc@^1.0.0": "jsr:@std/jsonc@1.0.0",
+      "jsr:@std/path@^1.0.2": "jsr:@std/path@1.0.2",
       "jsr:@std/ulid@^1.0.0": "jsr:@std/ulid@1.0.0",
       "npm:jsonld@^8.3.2": "npm:jsonld@8.3.2"
     },
@@ -18,8 +22,26 @@
           "jsr:@std/internal@^1.0.1"
         ]
       },
+      "@std/fs@1.0.1": {
+        "integrity": "d6914ca2c21abe591f733b31dbe6331e446815e513e2451b3b9e472daddfefcb",
+        "dependencies": [
+          "jsr:@std/path@^1.0.2"
+        ]
+      },
       "@std/internal@1.0.1": {
         "integrity": "6f8c7544d06a11dd256c8d6ba54b11ed870aac6c5aeafff499892662c57673e6"
+      },
+      "@std/json@1.0.0": {
+        "integrity": "985c1e544918d42e4e84072fc739ac4a19c3a5093292c99742ffcdd03fb6a268"
+      },
+      "@std/jsonc@1.0.0": {
+        "integrity": "835da212e586f3ef94ab25e8f0e8a7711a86fddbee95ad40c34d6b3d74da1a1b",
+        "dependencies": [
+          "jsr:@std/json@^1.0.0"
+        ]
+      },
+      "@std/path@1.0.2": {
+        "integrity": "a452174603f8c620bd278a380c596437a9eef50c891c64b85812f735245d9ec7"
       },
       "@std/ulid@1.0.0": {
         "integrity": "d41c3d27a907714413649fee864b7cde8d42ee68437d22b79d5de4f81d808780"
@@ -139,6 +161,9 @@
     "dependencies": [
       "jsr:@fartlabs/rt@^0.0.3",
       "jsr:@std/assert@^1.0.2",
+      "jsr:@std/fs@^1.0.1",
+      "jsr:@std/jsonc@^1.0.0",
+      "jsr:@std/path@^1.0.2",
       "jsr:@std/ulid@^1.0.0",
       "npm:@types/jsonld@^1.5.15",
       "npm:jsonld@^8.3.2"
