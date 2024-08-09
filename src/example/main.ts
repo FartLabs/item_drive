@@ -1,6 +1,6 @@
 import { createRouter } from "@fartlabs/rt";
 import type { FactQuery } from "#/facts/fact_query.ts";
-import type { Item } from "#/items/item.ts";
+import type { PartialItem } from "#/items/partial_item.ts";
 import { ItemDrive } from "#/item_drive.ts";
 import { InMemoryDataSource } from "#/data_sources/in_memory_data_source/mod.ts";
 import { ingestSchema } from "./ingest_schema.ts";
@@ -40,7 +40,7 @@ function parseQuery(url: URL): FactQuery[] | undefined {
   return query ? JSON.parse(query) : undefined;
 }
 
-function parseItems(url: URL): Item[] {
+function parseItems(url: URL): PartialItem[] {
   const items = url.searchParams.get("items");
   return items ? JSON.parse(items) : [];
 }
