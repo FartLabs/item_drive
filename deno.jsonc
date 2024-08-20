@@ -14,7 +14,7 @@
   },
   "tasks": {
     "dev": "deno run -A --env --watch src/example/main.ts",
-    "generate": "deno run --allow-read --allow-write generate_exports.ts"
+    "generate": "deno run --allow-read --allow-write generate_exports.ts && deno fmt"
   },
   "exports": {
     "./data_sources/data_source_interface": "./src/data_sources/data_source_interface.ts",
