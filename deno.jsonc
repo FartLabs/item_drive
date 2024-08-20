@@ -1,6 +1,6 @@
 {
   "name": "@fartlabs/item-drive",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "imports": {
     "#/": "./src/",
     "@fartlabs/rt": "jsr:@fartlabs/rt@^0.0.3",
